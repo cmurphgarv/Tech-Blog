@@ -20,11 +20,24 @@ Blog.init(
             allowNull: false
         },
         post_content: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'user',
+                key: 'id',
+            },
         }
     },
     {
+        hooks: {
+            beforeCreate: (newBlogPostData) => {
+                newBlogPostData.createdAt = new Date();
+                return newBlogPostData;
+            },
+        },
         sequelize,
         timestamps: true,
         freezeTableName: true,
