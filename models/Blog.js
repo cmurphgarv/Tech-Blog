@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const moment = require("moment");
 
 class Blog extends Model { }
 
@@ -34,7 +35,7 @@ Blog.init(
     {
         hooks: {
             beforeCreate: (newBlogPostData) => {
-                newBlogPostData.createdAt = new Date();
+                newBlogPostData.createdAt = new Date(newBlogPostData.createdAt);
                 return newBlogPostData;
             },
         },

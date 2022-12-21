@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
         include: { model: User },
       });
 
+      //format the date for blog post so it is more readable
       let blogPosts = dbBlogData.map((blogPost) => blogPost.get({ plain: true }));
       blogPosts = blogPosts.map((blogPost) => {
         blogPost.createdAt = moment(blogPost.createdAt).format("MMM Do YY");
